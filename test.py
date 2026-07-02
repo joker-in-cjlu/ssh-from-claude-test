@@ -10,7 +10,7 @@ def selection_sort(arr):
 
 
 if __name__ == "__main__":
-    data = [1, 2, 3, 4, 5]
+    data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     print("before sort:", data)
     sorted_data = selection_sort(data)
     print("after sort: ", sorted_data)
