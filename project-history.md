@@ -238,5 +238,65 @@ if __name__ == "__main__":
 
 ---
 
+## 会话 #4 — 2026-07-02
+
+### 用户问题与要求
+
+1. **发现 GitHub 上 commit 显示真实姓名 "Zhou Donghao" 和公司邮箱**：担心隐私泄露
+2. **确认 Co-Authored-By 行是否可见**：实际 commit message 中不含此行
+3. **要求隐藏个人信息**：不希望在 repo 中暴露真实姓名和公司邮箱
+
+### AI 回复与操作
+
+#### 操作 1：修改 git 配置
+
+```bash
+git config user.name "joker-in-cjlu"
+git config user.email "joker-in-cjlu@users.noreply.github.com"
+```
+
+**diff**：
+```diff
+- user.name = Zhou Donghao
+- user.email = donghao.zhou@Joynext.com
++ user.name = joker-in-cjlu
++ user.email = joker-in-cjlu@users.noreply.github.com
+```
+
+#### 操作 2：重写全部 commit 历史
+
+使用 `git filter-branch --env-filter` 将所有 5 个 commit 的 author/committer 替换为 GitHub 用户名。
+
+#### 操作 3：force push 覆盖远端
+
+```bash
+git push --force origin master
+```
+
+#### 操作 4：用户手动创建的 README.md 丢失
+
+原因：force push 前未 fetch 远端，用户在 GitHub 网页上创建的 README commit 被覆盖且无法恢复。
+
+**教训**：force push 前必须 `git fetch` 检查远端是否有新 commit。
+
+---
+
+### 当前文件状态总结
+
+| 文件 | 状态 | 说明 |
+|------|------|------|
+| `test.py` | 无变化 | 选择排序算法 |
+| `project-history.md` | 持续更新 | 本次追加会话 #4 |
+| `.gitignore` | 无变化 | 忽略 `__pycache__/` 和 `*.pyc` |
+| `README.md` | 丢失 | 用户在 GitHub 网页创建后被 force push 覆盖 |
+
+**Git 配置（本项目）**：
+```
+user.name = joker-in-cjlu
+user.email = joker-in-cjlu@users.noreply.github.com
+```
+
+---
+
 *后续对话将继续追加到此文档中。*
 
