@@ -8,6 +8,7 @@ def selection_sort(arr):
         arr[i], arr[min_idx] = arr[min_idx], arr[i]
     return arr
 
+print("add-hello")
 
 if __name__ == "__main__":
     data = [1, 2, 3, 4, 5]
