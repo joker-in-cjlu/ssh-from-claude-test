@@ -256,7 +256,7 @@ git config user.email "joker-in-cjlu@users.noreply.github.com"
 ```
 
 **diff**：
-```diff
+```diff 
 - user.name = Zhou Donghao
 - user.email = donghao.zhou@Joynext.com
 + user.name = joker-in-cjlu
@@ -298,5 +298,38 @@ user.email = joker-in-cjlu@users.noreply.github.com
 
 ---
 
-*后续对话将继续追加到此文档中。*
+
+---
+
+## 会话 #5 — 2026-07-03
+
+### 架构
+
+```
+temp-hexo-blog/          → git push → ssh-hexo-claude (源文件)
+    ↓ hexo deploy
+public/                  → git push → joker-in-cjlu.github.io (网页)
+```
+
+- 网页：https://joker-in-cjlu.github.io
+- 发布流程：写 `.md` → `git push` → `hexo deploy`
+
+### 遇到的问题与解决
+
+| 问题 | 原因 | 解决 |
+|------|------|------|
+| 页面空白 | `themes/butterfly/` 目录为空 | `git clone` butterfly 主题 |
+| deploy 泄露真实邮箱 | 全局 git config 有公司邮箱 | 用 `GIT_AUTHOR_EMAIL` 等环境变量 |
+| 同一 SSH key 不能用于多个仓库 | GitHub deploy key 限制 | 生成新 key + `~/.ssh/config` Host 别名区分 |
+| 头像不显示 | 本地 `9191.JPG` 部署后变 `9191.jpg`，大小写不匹配 | 引用路径改为小写 |
+| 改完仍不生效 | GitHub Pages CDN 顽固缓存旧 HTML | 改 `title` 触发强制刷新 |
+
+### 常用命令速查 (Windows)
+
+```bash
+netstat -ano | grep :5000              # 查端口占用
+tasklist //fi "PID eq <PID>"            # 查进程名
+taskkill //PID <PID> //F                # 杀进程
+git ls-remote --heads <url>            # 查远程分支
+```
 
