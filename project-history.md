@@ -217,3 +217,25 @@ taskkill //PID <PID> //F                # 杀进程
 git ls-remote --heads <url>            # 查远程分支
 ```
 
+---
+
+## 会话 #4 — 2026-07-06
+
+### 操作
+
+1. **清理 project-history.md**：删除会话 #1、#2，后续编号前移
+2. **hexo-blog 移出 tset**：从 `tset/temp-hexo-blog/` → `wsl2/hexo-blog/`，与 tset 同级
+3. **hexo deploy**：部署到 https://joker-in-cjlu.github.io
+
+### 偏好记录
+
+- "启动 hexo" = `hexo deploy`（不是 `hexo server`）
+
+### 架构更新
+
+```
+wsl2/
+├── tset/           ← ssh-from-claude-test repo
+└── hexo-blog/      ← hexo 源文件 repo（独立）
+```
+
